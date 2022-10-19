@@ -1,0 +1,35 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search AgroPortal</title>
+</head>
+<body>
+    <form id="form" method="post">
+        <input type="text" id="search" placeholder="search ...">
+        <input type="submit" id="button" value="Search">
+
+    </form>
+</body>
+
+    <script>
+        var form  = document.getElementById('form')
+        form.addEventListener('submit',function(e){
+            //auto submition
+            e.preventDefault()
+            var search = document.getElementById('search').value
+            console.log(search)
+            //fetch post request
+            fetch("http://data.agroportal.lirmm.fr/search?apikey=01fe45a1-8eca-4e5a-b5b1-5f9f556cde30&q=${search}",{
+                method:'POST',
+            })
+            .then(function(response){
+                return response.json()
+            })
+            .then(function(data){
+                console.log(data)
+            })
+        })
+    </script>
+</html>
