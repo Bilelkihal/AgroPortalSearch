@@ -20,6 +20,98 @@
         </button>
        
     </form>
+    <p id="resultsSentence">Results for ..</p>
+
+    <ul>
+        <li>
+           <p class="title">Bilel</p>
+            <p class="description">Is the best</p>
+        </li>
+        <li>
+            <p class="title">Bilel</p>
+             <p class="description">Is the best</p>
+         </li>
+         <li>
+            <p class="title">Bilel</p>
+             <p class="description">Is the best</p>
+         </li>
+         <li>
+            <p class="title">Bilel</p>
+             <p class="description">Is the best</p>
+         </li>
+         <li>
+            <p class="title">Bilel</p>
+             <p class="description">Is the best</p>
+         </li>
+         <li>
+            <p class="title">Bilel</p>
+             <p class="description">Is the best</p>
+         </li>
+         <li>
+            <p class="title">Bilel</p>
+             <p class="description">Is the best</p>
+         </li>
+         <li>
+            <p class="title">Bilel</p>
+             <p class="description">Is the best</p>
+         </li>
+         <li>
+            <p class="title">Bilel</p>
+             <p class="description">Is the best</p>
+         </li>
+         <li>
+            <p class="title">Bilel</p>
+             <p class="description">Is the best</p>
+         </li>
+         <li>
+            <p class="title">Bilel</p>
+             <p class="description">Is the best</p>
+         </li>
+         <li>
+            <p class="title">Bilel</p>
+             <p class="description">Is the best</p>
+         </li>
+         <li>
+            <p class="title">Bilel</p>
+             <p class="description">Is the best</p>
+         </li>
+         <li>
+            <p class="title">Bilel</p>
+             <p class="description">Is the best</p>
+         </li>
+         <li>
+            <p class="title">Bilel</p>
+             <p class="description">Is the best</p>
+         </li>
+         <li>
+            <p class="title">Bilel</p>
+             <p class="description">Is the best</p>
+         </li>
+         <li>
+            <p class="title">Bilel</p>
+             <p class="description">Is the best</p>
+         </li>
+         <li>
+            <p class="title">Bilel</p>
+             <p class="description">Is the best</p>
+         </li>
+         <li>
+            <p class="title">Bilel</p>
+             <p class="description">Is the best</p>
+         </li>
+         <li>
+            <p class="title">Bilel</p>
+             <p class="description">Is the best</p>
+         </li>
+         <li>
+            <p class="title">Bilel</p>
+             <p class="description">Is the best</p>
+         </li>
+         <li>
+            <p class="title">Bilel</p>
+             <p class="description">Is the best</p>
+         </li>
+    </ul>
 
     
         
@@ -27,6 +119,7 @@
 </body>
 
     <script>
+        // Fetch data
         var form  = document.getElementById('form')
         form.addEventListener('submit',function(e){
             //auto submition
@@ -43,6 +136,13 @@
             .then(function(data){
                 console.log(data)
             })
+            document.getElementById("resultsSentence").style.visibility = "visible";
+            document.getElementById("resultsSentence").innerHTML = "Search results for: "+search;
+
+
         })
+        // End fetch data
+        //---------------
+        // 
     </script>
 </html>
