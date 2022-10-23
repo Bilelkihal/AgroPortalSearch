@@ -23,11 +23,11 @@
     <p id="resultsSentence">Results for ..</p>
 
     <ul id="results">
-        
+    
     </ul>
 
-    <p class="seeAll" id="seeall">See all ...</p>
-
+    <p class="seeAll" id="seeall" onclick="seeallfunction()">See all ...</p>
+    
 
 
     
@@ -39,8 +39,9 @@
         // Fetch data
         var resultsData;
         var form  = document.getElementById('form')
+        var resultsDisplay = '';
         form.addEventListener('submit',function(e){
-            var resultsDisplay = '';
+            resultsDisplay = '';
             //auto submition
             e.preventDefault()
             var search = document.getElementById('search').value
@@ -53,31 +54,28 @@
                 return response.json()
             })
             .then(function(data){
-                resultsData = data
-                console.log("Number is: "+ resultsData['pageCount'])
-                var collection = resultsData['collection'][0]['prefLabel']
-                console.log("Collection is: "+collection )
-                ////
-                for(let i=0; i<5; i++){
-                var Thetitle = resultsData['collection'][i]['prefLabel']
-                var thelink = resultsData['collection'][i]['@id']
-                resultsDisplay += '<li> <p class="title">'+ Thetitle +'</p> <p class="description">'+thelink+'</p> </li> ';
+                if(data['collection'].length == 0){
+                    console.log("0 asahbi!!")
+                    resultsDisplay += 'No data found!';
+                    document.getElementById("results").innerHTML = resultsDisplay;
+                } else {
+                    resultsData = data
+                    var number_of_results = resultsData['collection'].length
+                    // console.log("Number is: "+ resultsData['pageCount'])
+                    // var collection = resultsData['collection'][0]['prefLabel']
+                    // console.log("Collection is: "+collection )
+                    ////
+                    for(let i=0; i<5; i++){
+                    var Thetitle = resultsData['collection'][i]['prefLabel']
+                    var thelink = resultsData['collection'][i]['@id']
+                    //<a href="www.bilel.com">www.bilel.com</a>
+                    resultsDisplay += '<li> <a href='+thelink+' class="title">'+ Thetitle +'</a> <li class="description">'+thelink+'</p> </li> ';
+                    }
+                    document.getElementById("resultsSentence").innerHTML = "search result for: "+search;
+                    document.getElementById("resultsSentence").style.visibility = "visible";
+                    document.getElementById("results").innerHTML = resultsDisplay;
+                    document.getElementById("seeall").style.visibility = "visible"
                 }
-                document.getElementById("resultsSentence").innerHTML = "search result for: "+search;
-                document.getElementById("resultsSentence").style.visibility = "visible";
-                document.getElementById("results").innerHTML = resultsDisplay;
-                // whene you press see all
-                for(let i=5; i<resultsData['collection'].length; i++){
-                var Thetitle = resultsData['collection'][i]['prefLabel']
-                var thelink = resultsData['collection'][i]['@id']
-                resultsDisplay += '<li> <p class="title">'+ Thetitle +'</p> <p class="description">'+thelink+'</p> </li> ';
-                }
-                document.getElementById("results").innerHTML = resultsDisplay;
-                /////
-
-
-                //console.log(resultsData)
-                
             })
 
 
@@ -87,7 +85,20 @@
         })
         // End fetch data
         //---------------
-        // display results
+        // display see all results
+
+        function seeallfunction(){
+            console.log("see all clicked!")
+             for(let i=5; i<resultsData['collection'].length; i++){
+             var Thetitle = resultsData['collection'][i]['prefLabel']
+             var thelink = resultsData['collection'][i]['@id']
+             var titlelink = resultsData['collection'][i]['links']['ui']
+             resultsDisplay += '<li> <a href='+titlelink+' class="title">'+ Thetitle +'</a> <li class="description">'+thelink+'</p> </li> ';
+             }
+             document.getElementById("results").innerHTML = resultsDisplay;
+             document.getElementById("seeall").style.visibility = "hidden"
+        }
+        
 
 
     </script>
