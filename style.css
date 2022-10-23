@@ -17,8 +17,15 @@
 #search{
     padding: 1.5% 1.5%;
     border-radius: 8px;
-    border: 1px solid grey;
+    border: 0;
     width: 41%;
+    box-shadow: rgba(100, 100, 111, 0.18) 0px 7px 29px 0px;
+}
+#search:focus{
+    outline: none;
+    border: 0;
+    box-shadow: rgba(100, 100, 111, 0.3) 0px 7px 29px 0px;
+
 }
 
 form{
@@ -26,15 +33,17 @@ form{
     padding-top: 145px;
 }
 button{
-    background: green;
+    background: #50bf2a;
     margin-left: 5px;
     height: 7%;
     width: 5%;
     border-radius: 8px;
-    border: 0
+    border: 0;
+    
 }
 button:hover{
-
+    background: #60bf3f;
+    cursor: pointer;
 }
 i{
     color: white;
