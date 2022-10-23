@@ -22,96 +22,13 @@
     </form>
     <p id="resultsSentence">Results for ..</p>
 
-    <ul>
-        <li>
-           <p class="title">Bilel</p>
-            <p class="description">Is the best</p>
-        </li>
-        <li>
-            <p class="title">Bilel</p>
-             <p class="description">Is the best</p>
-         </li>
-         <li>
-            <p class="title">Bilel</p>
-             <p class="description">Is the best</p>
-         </li>
-         <li>
-            <p class="title">Bilel</p>
-             <p class="description">Is the best</p>
-         </li>
-         <li>
-            <p class="title">Bilel</p>
-             <p class="description">Is the best</p>
-         </li>
-         <li>
-            <p class="title">Bilel</p>
-             <p class="description">Is the best</p>
-         </li>
-         <li>
-            <p class="title">Bilel</p>
-             <p class="description">Is the best</p>
-         </li>
-         <li>
-            <p class="title">Bilel</p>
-             <p class="description">Is the best</p>
-         </li>
-         <li>
-            <p class="title">Bilel</p>
-             <p class="description">Is the best</p>
-         </li>
-         <li>
-            <p class="title">Bilel</p>
-             <p class="description">Is the best</p>
-         </li>
-         <li>
-            <p class="title">Bilel</p>
-             <p class="description">Is the best</p>
-         </li>
-         <li>
-            <p class="title">Bilel</p>
-             <p class="description">Is the best</p>
-         </li>
-         <li>
-            <p class="title">Bilel</p>
-             <p class="description">Is the best</p>
-         </li>
-         <li>
-            <p class="title">Bilel</p>
-             <p class="description">Is the best</p>
-         </li>
-         <li>
-            <p class="title">Bilel</p>
-             <p class="description">Is the best</p>
-         </li>
-         <li>
-            <p class="title">Bilel</p>
-             <p class="description">Is the best</p>
-         </li>
-         <li>
-            <p class="title">Bilel</p>
-             <p class="description">Is the best</p>
-         </li>
-         <li>
-            <p class="title">Bilel</p>
-             <p class="description">Is the best</p>
-         </li>
-         <li>
-            <p class="title">Bilel</p>
-             <p class="description">Is the best</p>
-         </li>
-         <li>
-            <p class="title">Bilel</p>
-             <p class="description">Is the best</p>
-         </li>
-         <li>
-            <p class="title">Bilel</p>
-             <p class="description">Is the best</p>
-         </li>
-         <li>
-            <p class="title">Bilel</p>
-             <p class="description">Is the best</p>
-         </li>
+    <ul id="results">
+        
     </ul>
+
+    <p class="seeAll" id="seeall">See all ...</p>
+
+
 
     
         
@@ -120,29 +37,58 @@
 
     <script>
         // Fetch data
+        var resultsData;
         var form  = document.getElementById('form')
         form.addEventListener('submit',function(e){
+            var resultsDisplay = '';
             //auto submition
             e.preventDefault()
             var search = document.getElementById('search').value
             console.log(search)
             //fetch post request
-            fetch("http://data.agroportal.lirmm.fr/search?apikey=01fe45a1-8eca-4e5a-b5b1-5f9f556cde30&q=${search}",{
+            fetch("http://data.agroportal.lirmm.fr/search?apikey=01fe45a1-8eca-4e5a-b5b1-5f9f556cde30&q="+search,{
                 method:'POST',
             })
             .then(function(response){
                 return response.json()
             })
             .then(function(data){
-                console.log(data)
+                resultsData = data
+                console.log("Number is: "+ resultsData['pageCount'])
+                var collection = resultsData['collection'][0]['prefLabel']
+                console.log("Collection is: "+collection )
+                ////
+                for(let i=0; i<5; i++){
+                var Thetitle = resultsData['collection'][i]['prefLabel']
+                var thelink = resultsData['collection'][i]['@id']
+                resultsDisplay += '<li> <p class="title">'+ Thetitle +'</p> <p class="description">'+thelink+'</p> </li> ';
+                }
+                document.getElementById("resultsSentence").innerHTML = "search result for: "+search;
+                document.getElementById("resultsSentence").style.visibility = "visible";
+                document.getElementById("results").innerHTML = resultsDisplay;
+                // whene you press see all
+                for(let i=5; i<resultsData['collection'].length; i++){
+                var Thetitle = resultsData['collection'][i]['prefLabel']
+                var thelink = resultsData['collection'][i]['@id']
+                resultsDisplay += '<li> <p class="title">'+ Thetitle +'</p> <p class="description">'+thelink+'</p> </li> ';
+                }
+                document.getElementById("results").innerHTML = resultsDisplay;
+                /////
+
+
+                //console.log(resultsData)
+                
             })
-            document.getElementById("resultsSentence").style.visibility = "visible";
-            document.getElementById("resultsSentence").innerHTML = "Search results for: "+search;
+
+
+            // display data
 
 
         })
         // End fetch data
         //---------------
-        // 
+        // display results
+
+
     </script>
 </html>
