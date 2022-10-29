@@ -12,6 +12,7 @@
 }
 #search_img{
     width: 40%;
+    animation: go-up 1s ease-out;
 }
 .position{
     display: flex;
@@ -33,14 +34,25 @@
 }
 
 form{
-    
     margin-left: 30.5%;
     padding-top: 195px;
+    animation: go-up 1s ease-out;
+}
+@keyframes go-up {
+    0%{
+        opacity: 0%;
+        transform: translateY(5%);
+        
+    }
+    100%{
+        opacity: 100%;
+        
+    }
 }
 button{
     background: #50bf2a;
     margin-left: 5px;
-    height: 7%;
+    height: 5%;
     width: 5%;
     border-radius: 8px;
     border: 0;
@@ -60,6 +72,7 @@ ul{
     
 }
 li{
+    animation: go-up 0.2s ease-out;
     margin: 0px 0px 0px 0px;
     
     
